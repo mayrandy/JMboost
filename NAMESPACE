@@ -1,0 +1,8 @@
+import("mboost")
+
+importFrom("stats", "coef", "dnorm", "lm", "optimize", "resid",
+            "rnorm", "runif", "sd", "var", "uniroot")
+importFrom("methods", "is")
+
+
+export(JMboost, riskJM, simJM)
