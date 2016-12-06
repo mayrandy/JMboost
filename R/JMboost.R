@@ -23,7 +23,7 @@
 # --------
 
 JMboost <- function(y, Xl, Xls, last, delta, id, time, lambda = 1, alpha = 0.1,
-                       m_stop_l, m_stop_ls = NULL, step.length, betatimeind = 0){
+                       m_stop_l, m_stop_ls = NULL, step.length = 0.1, betatimeind = 0){
 
   sigma2 <- var(y) # starting value for sigma2
   if(is.null(m_stop_ls)){m_stop_ls <- m_stop_l} # use m_stop_l if ls missing

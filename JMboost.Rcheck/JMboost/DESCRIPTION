@@ -5,10 +5,12 @@ Title: Boosting Joint Models for Longitudinal and Time-to-Event
 Version: 0.1.0
 Author: Elisabeth Waldmann, Andreas Mayr
 Maintainer: Andreas Mayr <andreas.mayr@fau.de>
-Description: Provides basic functions to boost joint models with linear base-learners.
+Description: Provides basic functions to boost joint models with linear base-
+    learners.
 License: GPL-2
 LazyData: TRUE
 Depends: methods, mboost
+RoxygenNote: 5.0.1
 NeedsCompilation: no
-Packaged: 2016-12-05 15:56:23 UTC; amayr
-Built: R 3.3.1; ; 2016-12-05 15:56:30 UTC; unix
+Packaged: 2016-12-06 10:32:31 UTC; amayr
+Built: R 3.3.1; ; 2016-12-06 10:32:37 UTC; unix
