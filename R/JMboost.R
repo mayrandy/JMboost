@@ -12,8 +12,8 @@
 # lambda: starting value baseline hazard
 # alpha: starting value association parameter
 # sigma2: starting value for sigma2^2  (in the longitudianal part) REMOVE!
-# m_stop_l: stopping iteration for long. predictor
-# m_stop_ls stopping iteration for shard predictor
+# mstop_l: stopping iteration for long. predictor
+# mstop_ls stopping iteration for shard predictor
 # step.length: for the boosting update (default 0.1?) SET!
 # betatimeind: indicating which coefficient is fixed time effect [number]
 # -----------------------------------------------------
@@ -23,11 +23,11 @@
 # --------
 
 JMboost <- function(y, Xl, Xls, last, delta, id, time, lambda = 1, alpha = 0.1,
-                       m_stop_l, m_stop_ls = NULL, step.length = 0.1, betatimeind = 0){
+                       mstop_l, mstop_ls = NULL, step.length = 0.1, betatimeind = 0){
 
   sigma2 <- var(y) # starting value for sigma2
-  if(is.null(m_stop_ls)){m_stop_ls <- m_stop_l} # use m_stop_l if ls missing
-  m_stop <- max(m_stop_l, m_stop_ls) # general mstop, perhaps RENAME
+  if(is.null(mstop_ls)){mstop_ls <- mstop_l} # use mstop_l if ls missing
+  mstop <- max(mstop_l, mstop_ls) # general mstop, perhaps RENAME
 
   n <- length(y) # number of all obs
   N <- length(unique(id)) # number of subjects
@@ -71,13 +71,13 @@ JMboost <- function(y, Xl, Xls, last, delta, id, time, lambda = 1, alpha = 0.1,
   if(length(betals)==1){betals <- t(betals)} # R can not handle it otherwise
 
   # storing matrices and vectors
-  gamma0_mat <- matrix(0,ncol=m_stop,nrow=N)
-  gamma1_mat <- matrix(0,ncol=m_stop,nrow=N)
-  beta_mat <- matrix(0, ncol=m_stop, nrow=ncol(X))
-  betals_mat <- matrix(0, ncol=m_stop, nrow=ncol(Xls))
-  alphavec <- rep(0, m_stop)
-  lambdavec <- rep(0, m_stop)
-  sigma2vec <- rep(0, m_stop)
+  gamma0_mat <- matrix(0,ncol=mstop,nrow=N)
+  gamma1_mat <- matrix(0,ncol=mstop,nrow=N)
+  beta_mat <- matrix(0, ncol=mstop, nrow=ncol(X))
+  betals_mat <- matrix(0, ncol=mstop, nrow=ncol(Xls))
+  alphavec <- rep(0, mstop)
+  lambdavec <- rep(0, mstop)
+  sigma2vec <- rep(0, mstop)
 
 
   m <- 0 # iteration counter
@@ -85,13 +85,13 @@ JMboost <- function(y, Xl, Xls, last, delta, id, time, lambda = 1, alpha = 0.1,
   #---------------------------------
 
   ### Outer loop
-  for(m in 1:m_stop){
+  for(m in 1:mstop){
 
 
     ###############################################################
     #### S1  ######################################################
     ###############################################################
-    if(m <= m_stop_l){
+    if(m <= mstop_l){
       if(ncol(X)>1){ # more than just intercept
         f <- X%*%beta  # this is the predictor we are actually boosting (long.)
 
@@ -122,7 +122,7 @@ JMboost <- function(y, Xl, Xls, last, delta, id, time, lambda = 1, alpha = 0.1,
     ###############################################################
     #
     #
-    if(m <= m_stop_ls){
+    if(m <= mstop_ls){
 
       # predictor for last obs
       f_surv <- Xran[last==1,]%*%c(gamma0,gamma1) + Xls[last==1,]%*%betals
