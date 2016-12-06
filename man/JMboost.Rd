@@ -45,7 +45,7 @@ starting value association parameter
   \item{mstop_l}{
 Stopping iteration longitudinal predictor.
 }
-  \item{m_stop_ls}{
+  \item{mstop_ls}{
 Stopping iteration shared predictor.
 }
   \item{step.length}{
