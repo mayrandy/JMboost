@@ -1,9 +1,10 @@
 # JMboost
 
 
-`JMboost` implements a boosting algorithms for fitting joint models to potentially 
+`JMboost` implements a boosting algorithm for fitting joint models to potentially 
 high-dimensional data. The algorithm provides the functionality to simultaneously 
 estimate a longitudinal and a shared predictor.
+
 
 ## Installation
 
