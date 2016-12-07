@@ -2,10 +2,10 @@
 \alias{simJM}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Simulate data frames for joint modelling of longitudinal and time-to-event outcome.
+Simulate joint model data
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Simulate data frames for joint modelling of longitudinal and time-to-event outcome.
 }
 \usage{
 simJM(n = 100, n_i = 5, alpha = 0.5,

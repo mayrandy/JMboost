@@ -5,4 +5,4 @@ importFrom("stats", "coef", "dnorm", "lm", "optimize", "resid",
 importFrom("methods", "is")
 
 
-export(JMboost, riskJM, simJM)
+export(JMboost, simJM)

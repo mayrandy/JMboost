@@ -179,16 +179,16 @@ JMboost <- function(y, Xl, Xls, last, delta, id, time, lambda = 1, alpha = 0.1,
       f_surv <- Xran[last==1,]%*%c(gamma0,gamma1) + Xls[last==1,]%*%betals
 
       # optimize lambda
-      lambda <- optimize(riskJM, alpha = alpha, f_surv = f_surv, delta = delta, gamma1 = gamma1,
+      lambda <- optimize(risk_surv, alpha = alpha, f_surv = f_surv, delta = delta, gamma1 = gamma1,
                          betals = betals, betatimeind = betatimeind, time = time[last==1],
                          interval=c(0,100))$minimum
       #
       if(m > 20){
-        alpha <- optimize(riskJM, lambda = lambda, f_surv = f_surv,  delta = delta, gamma1 = gamma1,
+        alpha <- optimize(risk_surv, lambda = lambda, f_surv = f_surv,  delta = delta, gamma1 = gamma1,
                           betals = betals, betatimeind = betatimeind, time = time[last==1],
                           interval=c(-100,100))$minimum
       }else{
-        alpha <- optimize(riskJM, lambda = lambda, f_surv = f_surv,  delta = delta, gamma1 = gamma1,
+        alpha <- optimize(risk_surv, lambda = lambda, f_surv = f_surv,  delta = delta, gamma1 = gamma1,
                           betals = betals, betatimeind = betatimeind, time = time[last==1],
                           interval=c(-1,1))$minimum}
 
@@ -228,4 +228,37 @@ JMboost <- function(y, Xl, Xls, last, delta, id, time, lambda = 1, alpha = 0.1,
                  alpha = alpha, lambda = lambda,  sigma2 = sigma2))
 }
 
+########################
 
+# risk: Survival Likelihood for optimization of alpha and lambda
+#---------------------------------------------------
+# IN:
+# alpha: association parameter
+# lamda: const. baseline hazard
+# f_surv: shared predictor at last observation
+# delta: censoring indicator 1xn
+# gamma1: random slope
+# betals: shared coefficients
+# betatimeind: indicating which coefficient is fixed time effect [number]
+# if betatimeind == 0 then we do not have any
+# time: last observation / time of death (1xn)
+#---------------------------------------------------
+# OUT:
+# negative log likelihood (sum over obs)
+
+
+risk_surv <- function(alpha, lambda, f_surv, delta, gamma1, betals, betatimeind, time){
+  if(betatimeind!=0){ # with fixed time effect ...
+    if(sum(gamma1)!=0 | betals[betatimeind]!=0) # do we actually have any time effect (random or fixed)
+      # at current iteration? YES
+    { res <- -(sum(delta[delta==1]*log(lambda) + alpha*f_surv[delta==1]) -
+                 sum( lambda*(exp(alpha*f_surv) - exp(alpha*(f_surv - gamma1*time - betals[betatimeind]*time))) /
+                        (alpha*(gamma1 + betals[betatimeind])) ))
+    }else{  # at current iteration NO (random or fixed) time effect
+      res <- -(sum(delta[delta==1]*log(lambda) + alpha*f_surv[delta==1]) - sum(lambda*exp(alpha*f_surv)*time))
+    }
+  }else{ # needs to be fixed ! #
+    res <- -(sum(delta[delta==1]*log(lambda) +alpha*f_surv[delta==1]) -
+               sum(lambda*(exp(alpha*f_surv)-exp(alpha*(f_surv-gamma1*time)))/(alpha*gamma1)))}
+  return(res)
+}

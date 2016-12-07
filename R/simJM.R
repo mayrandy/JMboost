@@ -6,7 +6,8 @@
 ## alpha: association parameter
 ## lambda: constant baseline hazard
 
-simJM <- function(n, n_i, alpha, beta, betals = 0, betatimeind = 0, lambda){
+simJM <- function(n = 100, n_i = 5, alpha = 0.5,
+                  beta, betals = 0, betatimeind = 0, lambda){
 
   ### generating id
   id <- rep(1:n, each=n_i)
