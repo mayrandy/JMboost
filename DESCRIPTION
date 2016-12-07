@@ -1,5 +1,6 @@
 Package: JMboost
 Type: Package
+Date: 2016-07-12
 Title: Boosting Joint Models for Longitudinal and Time-to-Event Outcomes
 Version: 0.1.0
 Author: Elisabeth Waldmann, Andreas Mayr
@@ -8,6 +9,5 @@ Description: Provides basic functions to boost joint models with linear base-
     learners.
 License: GPL-2
 LazyData: TRUE
-Depends:
-    methods,
-    mboost
+Depends: methods, mboost
+URL: For source code see https://github.com/mayrandy/JMboost
