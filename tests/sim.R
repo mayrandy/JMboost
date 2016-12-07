@@ -1,4 +1,4 @@
-
+library(JMboost)
 set.seed(123)
 dat <- simJM(n = 400, n_i = 3, alpha = .5, beta = c(1,2,3), betals = c(2,3,1), betatimeind = 3,
             lambda = 0.6)
