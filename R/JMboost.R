@@ -221,10 +221,11 @@ JMboost <- function(y, Xl, Xls, last, delta, id, time, lambda = 1, alpha = 0.1,
   }
 
 
-  structure(list(gamma1_mat=gamma1_mat,gamma0_mat=gamma0_mat, beta_mat= beta_mat, beta = beta,
-                 betals_mat= betals_mat, betals = betals,
-                 gamma0=gamma0, gamma1=gamma1, alpha= alpha, alphavec =alphavec,
-                 lambda=lambda, lambdavec = lambdavec, sigma2vec=sigma2vec, sigma2=sigma2))
+  structure(list(gamma1_mat = gamma1_mat, gamma0_mat = gamma0_mat, beta_mat = beta_mat,
+                 betals_mat = betals_mat, lambdavec = lambdavec, sigma2vec = sigma2vec,
+                 alphavec =alphavec,
+                 beta = beta, betals = betals, gamma0 = gamma0, gamma1 = gamma1,
+                 alpha = alpha, lambda = lambda,  sigma2 = sigma2))
 }
 
 
