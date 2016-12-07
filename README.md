@@ -6,7 +6,7 @@ high-dimensional data. The algorithm provides the functionality to simultaneousl
 estimate a longitudinal and a shared predictor.
 
 Details can be found here:
-- [JMboost manuscript](https://arxiv.org/abs/1609.02686); This is apreliminary version currently under review.
+- [JMboost manuscript](https://arxiv.org/abs/1609.02686) (preliminary version currently under review).
 
 
 ## Installation
