@@ -1,4 +1,5 @@
 library(JMboost)
+setup <- "small"
 n <- 500
 n2 <- 1000
 n_i <- 5
