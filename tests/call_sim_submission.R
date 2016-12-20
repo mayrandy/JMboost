@@ -23,8 +23,6 @@ like_cv <- function(delta, lambda, alpha, time,
   like
 }
 
-
-
 for(k in 1:2){
 set.seed(k)  
 si <- simJM(n, n_i, alpha, beta, betals,  betatimeind = 3,lambda,4,4)
@@ -59,4 +57,4 @@ bom <- JMboost(y =si$y, X = si$X, Xls = si$Xls, last = si$last,
   
 }
 bom$beta
-bom$gamma1
+bom$alpha

@@ -9,7 +9,8 @@ Simulate data frames for joint modelling of longitudinal and time-to-event outco
 }
 \usage{
 simJM(n = 100, n_i = 5, alpha = 0.5,
-      beta, betals = 0, betatimeind = 0, lambda)
+      beta, betals = 0, betatimeind = 0, lambda, 
+      noninf = 0, noninfls = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -33,6 +34,12 @@ index of time-variable in shared predictor.
 }
   \item{lambda}{
 constant bazeline hazard.
+}
+  \item{noninf}{
+noninf: number of non informative covariates for the longitudinal sub-predictor.
+}
+\item{noninfls}{
+noninfls: number of non informative covariates for the shared sub-predictor
 }
 }
 \details{
