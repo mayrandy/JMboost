@@ -29,7 +29,9 @@ set.seed(k)
 si <- simJM(n, n_i, alpha, beta, betals,  betatimeind = 3,lambda,300,300)
 si2 <- simJM (n2, n_i, alpha, beta, betals,  betatimeind = 3,lambda, 300, 300)
 bo <-list()
-mseq <- seq(30,300, length=10)
+
+  mseq1 <- seq(95,140, length=10)
+  mseq2 <- seq(130,220, length=10)
 likemat <- matrix(nrow=10, ncol=10)
 
 for(m_akt_ls in 1:2){
@@ -37,7 +39,7 @@ for(m_akt_ls in 1:2){
     
     bo <- JMboost(y =si$y, X = si$X, Xls = si$Xls, last = si$last,
                   delta = si$delta, id = si$id, time = si$time, lambda = .1, alpha = 0.1,
-                  mseq[m_akt_l],mstop_ls= mseq[m_akt_ls], step.length = .1, betatimeind = 3) 
+                  mseq1[m_akt_l],mstop_ls= mseq2[m_akt_ls], step.length = .1, betatimeind = 3) 
     delta2 <- si2$delta[si2$id]
     like <- like_cv(delta2[si2$last==1], bo$lambda, bo$alpha, 
                     si2$time[si2$last==1], bo$sigma2, si2$y[si2$last==0], 
