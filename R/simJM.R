@@ -5,9 +5,11 @@
 ## betatimeind: is there a time dependent effect in betals? Which one?
 ## alpha: association parameter
 ## lambda: constant baseline hazard
+## noninf: number of non informative covariates for the longitudinal sub-predictor
+## noninfls: number of non informative covariates for the shared sub-predictor
 
 simJM <- function(n = 100, n_i = 5, alpha = 0.5,
-                  beta, betals = 0, betatimeind = 0, lambda){
+                  beta, betals = 0, betatimeind = 0, lambda, noninf = 0, noninfls = 0) {
 
   ### generating id
   id <- rep(1:n, each = n_i)
