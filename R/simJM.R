@@ -83,24 +83,56 @@ simJM <- function(n = 100, n_i = 5, alpha = 0.5,
   time_mat_help <- time_mat*as.numeric(t(t(time_mat) <= (death_time[,2])))
   time_zero <- as.vector(time_mat_help)
 
-
-  if(length(which(time_zero == 0)) >0){
-    id <- id[- which(time_zero == 0)]
-    y <- y[- which(time_zero == 0)]
-    X <- X[- which(time_zero == 0),]
-    Xls <- Xls[- which(time_zero == 0),]
-    time <- time[- which(time_zero == 0)]
-    R_mean <- R_mean[- which(time_zero == 0),]
-    prob_death <- prob_death[- which(time_zero == 0)]
-    pred_surv <- pred_surv[- which(time_zero == 0)]}
-  c_i <- c_i
+  if (length(which(time_zero == 0)) > 0) {
+    id <- id[-which(time_zero == 0)]
+    y <- y[-which(time_zero == 0)]
+    X <- X[-which(time_zero == 0), ]
+    Xls <- Xls[-which(time_zero == 0), ]
+    time <- time[-which(time_zero == 0)]
+    R_mean <- R_mean[-which(time_zero == 0), ]
+    prob_death <- prob_death[-which(time_zero == 0)]
+    pred_surv <- pred_surv[-which(time_zero == 0)]
+  }
   last <- rep(FALSE, length(time))
   id_un <- unique(id)
-  for(i in 1:length(id_un)){
+  for (i in 1:length(id_un)) {
     last[max(which(id == id_un[i]))] <- TRUE
   }
+  
+  
+  if (betatimeind != 0) {
+    Xls <- cbind(Xls, time)
+  }
+  
+  if(noninf > 0 | noninfls>0){
+    for(i in 1:max(c(noninf, noninfls))){
+      if(i <=noninf){
+        X <- cbind(X,rnorm(nrow(X)))}
+      if(i<=noninfls){
+        Xls <- cbind(Xls, rnorm(length(unique(id)))[id])}
+      
+    }
+  }
+  
+  
+  idun <- which(table(id)==1)
+  if(length(idun)>0){
+    delta <- delta[-idun]
+    Xls <- Xls[-which(id%in%which(table(id)==1)),]
+    X <- X[-which(id%in%which(table(id)==1)),]
+    y <- y[-which(id%in%which(table(id)==1))]
+    time <- time[-which(id%in%which(table(id)==1))]
+    last <- last[-which(id%in%which(table(id)==1))]
+    id <- id[-which(id%in%which(table(id)==1))]
+    R_mean <- R_mean[-which(id%in%which(table(id)==1)), ]
+    prob_death <- prob_death[-which(id%in%which(table(id)==1))]
+    pred_surv <- pred_surv[-which(id%in%which(table(id)==1))]
+    lidun <- length(idun)
+    for(i in 1:lidun){
+      id[id>(idun[i]-(i-1))] <- id[id>(idun[i]-(i-1))]-1
+    }
+  }
 
-  if(betatimeind!=0){Xls <- cbind(Xls, time)}
   X <- X[,-1]
 
 
