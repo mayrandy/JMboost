@@ -56,6 +56,6 @@ for(m_akt_ls in 1:2){
 m <- which(likemat[[k]] == max(likemat[[k]], na.rm=T), arr.ind = TRUE)[1,]
 bom[[k]] <- JMboost(y =si$y, X = si$X, Xls = si$Xls, last = si$last,
                delta = si$delta, id = si$id, time = si$time, lambda = .1, alpha = 0.1,
-               mseq[m[1]],mstop_ls= mseq[m[2]], step.length = .1, betatimeind = 3) 
+               mseq1[m[1]],mstop_ls= mseq2[m[2]], step.length = .1, betatimeind = 3) 
   
 }
