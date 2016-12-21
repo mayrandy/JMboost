@@ -27,7 +27,7 @@ like_cv <- function(delta, lambda, alpha, time,
 bom <- list()
 likemat <- list()
 
-for(k in 1:2){
+for(k in 1:100){
 set.seed(k)  
 si <- simJM(n, n_i, alpha, beta, betals,  betatimeind = 3,lambda,4,4)
 si2 <- simJM (n2, n_i, alpha, beta, betals,  betatimeind = 3,lambda, 4,4)
@@ -35,8 +35,8 @@ bo <-list()
 mseq <- seq(30,300, length=10)
 likemat[[k]] <- matrix(nrow=10, ncol=10)
 
-for(m_akt_ls in 1:2){
-  for(m_akt_l in 1:2){
+for(m_akt_ls in 1:10){
+  for(m_akt_l in 1:10){
     
     bo <- JMboost(y =si$y, X = si$X, Xls = si$Xls, last = si$last,
                   delta = si$delta, id = si$id, time = si$time, lambda = .1, alpha = 0.1,
@@ -57,5 +57,3 @@ bom[[k]] <- JMboost(y =si$y, X = si$X, Xls = si$Xls, last = si$last,
                mseq[m[1]],mstop_ls= mseq[m[2]], step.length = .1, betatimeind = 3) 
   
 }
-bom[[k]]$beta
-bom[[k]]$alpha
