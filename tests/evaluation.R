@@ -28,9 +28,9 @@ betals_prop[1:3]
 round(mean(alpha), 3)
 round(sd(alpha), 3)
 
+beta_gr <- cbind(beta, betals)
 
 if(ncol(beta_gr)<20){
-beta_gr <- cbind(beta, betals)
 boxplot(beta_gr, las=1, axes=FALSE, ylim=c(-2.5,2.5), col="lightgrey", border="grey",
         boxwex=c(rep(.85, 3), rep(.4,4), rep(.85,3), rep(.4,4)),
         at=c(1:3, seq(4,5.5,length=4),seq(6.5,8.5,1), seq(9.5,11,length=4)))
