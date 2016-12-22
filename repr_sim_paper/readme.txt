@@ -1,8 +1,8 @@
 The three simulation setups can be reconstructed by running the separate files
 
-- S1: call_sim_submission.R
-- S2: call_sim_submission_pgN.R
-- S3: call_sim_submission_pgn.R
+- S1: call_s1.R
+- S2: call_s2.R
+- S3: call_s3.R
 
 In order to reconstruct the results, the code 
 
