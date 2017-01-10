@@ -99,11 +99,15 @@ simJM <- function(n = 100, n_i = 5, alpha = 0.5,
     last[max(which(id == id_un[i]))] <- TRUE
   }
     
-   if (betatimeind != 0) {
+ if (betatimeind != 0) {
+    if(is.matrix(Xls)){
     if(betatimeind == ncol(Xls)+1){
-    Xls <- cbind(Xls, time)}else{
-      Xls <- cbind(Xls[,c(1:(betatimeind-1))], time, Xls[,c(betatimeind:ncol(Xls))])
-    }
+      Xls <- cbind(Xls, time)}else{
+        Xls <- cbind(Xls[,c(1:(betatimeind-1))], time, Xls[,c(betatimeind:ncol(Xls))])
+      }}else{
+         if(betatimeind == 1){Xls <- cbind(time, Xls)}else{
+           Xls <- cbind(Xls, time)}
+       }
   }
   
   if(noninf > 0 | noninfls>0){
