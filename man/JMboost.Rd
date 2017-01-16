@@ -67,7 +67,7 @@ dat <- simJM(n = 400, n_i = 3, alpha = .5,
             beta = c(1,2,3), betals = c(2,3,1),
             betatimeind = 3, lambda = 0.6)
 
-j1 <- JMboost(y = dat$y, Xl = dat$Xl, Xls = dat$Xls,
+j1 <- JMboost(y = dat$y, Xl = dat$X, Xls = dat$Xls,
               last = dat$last, delta = dat$delta,
               id = dat$id, time = dat$time, lambda = 1, alpha = 0.1,
               mstop_l = 100, mstop_ls = 100, step.length = 0.1,
