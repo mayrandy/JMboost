@@ -146,7 +146,7 @@ simJM <- function(n = 100, n_i = 5, alpha = 0.5,
     #### longitudinal outcome
     "y" = y,
     #### longitudinal predictor fixed effect covariates
-    "Xl" = X,
+    "X" = X,
     #### shared predictor fixed effect covariates
     "Xls"=Xls,
     ### Values for the random effects
